@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- <script src="./hello.js"></script>
+    <script src="./world.js"></script> -->
+    <!-- 여러 파일에 같은 변수가 있어도 하나의 파일로 인식하므로 오류 -->
+  </head>
+  <body>
+    <script type="module">
+      //   console.log(str);
+
+      import helloStr, { greeting } from "./hello.js";
+      import worldStr, { add } from "./world.js";
+      console.log(helloStr);
+
+      greeting();
+      console.log(add(1, 2));
+      console.log(worldStr);
+
+      //여러 파일에 같은 변수가 있어도 각각의 파일로 인식하므로 모듈별 관리 가능
+    </script>
+  </body>
+</html>
