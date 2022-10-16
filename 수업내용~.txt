@@ -27,3 +27,10 @@ npx create-react-app [폴더명]
 터미널 새로 열어서 powershell mode에서
 
 npm run build
+:js파일을 브라우저에 띄울 수 있음 (라이브서버처럼)
+
+
+
+============
+[221016]
+
