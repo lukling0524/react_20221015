@@ -1,28 +1,29 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-function AddUser({ onCreate }) {
-  const [inputs, setInputs] = useState({
-    name: "",
-    age: "",
-  });
+function AddUser({ onCreate, inputs, handleInput, reset }) {
+  // const [inputs, setInputs] = useState({
+  //   name: "",
+  //   age: "",
+  // });
 
   //input value 불러오기
-  const handleInput = (e) => {
-    const { value, name } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
-  };
+  // const handleInput = (e) => {
+  //   const { value, name } = e.target;
+  //   setInputs({
+  //     ...inputs,
+  //     [name]: value,
+  //   });
+  // };
 
   //등록과 동시에 인풋 value 지우기
   const onClickSubmit = (e) => {
     e.preventDefault();
     onCreate(inputs);
-    setInputs({
-      name: "",
-      age: "",
-    });
+    // setInputs({
+    //   name: "",
+    //   age: "",
+    // });
+    reset();
   };
 
   //   const onClickRemove = (id) => {
@@ -49,4 +50,4 @@ function AddUser({ onCreate }) {
   );
 }
 
-export default AddUser;
+export default React.memo(AddUser);

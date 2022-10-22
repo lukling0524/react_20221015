@@ -1,101 +1,22 @@
-import { useRef, useState } from "react";
-import AddUser from "./AddUser";
+import React, { useMemo } from "react";
+// useMemo - 성능최적화
+function countUser(arr) {
+  console.log("counting....");
+  // return arr.length;
 
-function UserList() {
-  const [userList, setUserList] = useState([
-    {
-      id: 1,
-      name: "1번",
-      age: 11,
-      active: true,
-    },
-    {
-      id: 2,
-      name: "2번",
-      age: 22,
-      active: false,
-    },
-    {
-      id: 3,
-      name: "3번",
-      age: 33,
-      active: false,
-    },
-  ]);
+  //active true인 함수만 count (배열함수 활용)
+  return arr.filter((user) => user.active).length;
+}
 
-  //   const jsxList = userList.map((user) => (
-  //     <li>
-  //       {user.name}({user.age}세)
-  //     </li>
-  //   ));
+function UserList({ userList, onToggle, onRemove }) {
+  // const usercount = countUser(userList);
+  //의존하는 값이 변할때만 연산을 한다
+  // const usercount = useMemo(() => countUser(userList), [userList]);
 
-  //변수에 담지 않고 직접 삽입도 가능
-  // <ul>
-  //   userList.map((user) => (
-  //   <li>
-  //     {user.name}({user.age}세)
-  //   </li>
-  //   ))
-  // </ul>;
-
-  //변수에 담기
-  //   <ul>{jsxList}</ul>
-
-  //useRef로 값을 관리하면 값이 변경되어도 리렌더링이 일어나지 않는다
-  //  => 특정 값을 기억해놓고 변경할 때 사용 (렌더링과 상관없이 변경 가능한 값)
-  const nextId = useRef(4);
-
-  const onCreate = (inputs) => {
-    const { name, age } = inputs;
-    // setUserList([
-    //   ...userList,
-    //   {
-    //     id: nextId.current,
-    //     name,
-    //     age,
-    //   },
-    // ]);
-
-    setUserList(
-      //Array.prototype.concat : 인자로 전달된 배열 혹은 원소를 합쳐서 새로운 배열 반환
-      userList.concat({
-        id: nextId.current,
-        name,
-        age,
-      })
-    );
-
-    nextId.current++;
-  };
-
-  const onRemove = (id) => {
-    const confirmMsg = window.confirm("삭제하시겠습니까?");
-
-    if (confirmMsg) {
-      //업데이트를 위해 setUserList 무조건 사용
-      setUserList(userList.filter((user) => user.id !== id));
-      console.log(id);
-    }
-  };
-
-  const onToggle = (id) => {
-    setUserList(
-      userList.map(
-        (user) => (user.id === id ? { ...user, active: !user.active } : user)
-
-        // if (user.id === id)
-        //   return {
-        //     ...user,
-        //     active: !user.active,
-        //   };
-        // else return user;
-      )
-    );
-  };
+  console.log("UserList Render");
 
   return (
     <div>
-      <AddUser onCreate={onCreate} />
       <h2>유저목록</h2>
       <ul>
         {userList.map((user) => (
@@ -129,4 +50,4 @@ function User({ user, onRemove, onToggle }) {
     </li>
   );
 }
-export default UserList;
+export default React.memo(UserList); // react memo로 컴포넌트 감싸기
