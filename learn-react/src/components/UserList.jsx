@@ -1,4 +1,5 @@
-import React, { useMemo } from "react";
+import React, { useContext, useMemo } from "react";
+import { UserDispatchContext } from "../App";
 // useMemo - 성능최적화
 function countUser(arr) {
   console.log("counting....");
@@ -21,12 +22,7 @@ function UserList({ userList, onToggle, onRemove }) {
       <ul>
         {userList.map((user) => (
           //props 통해서 User 컴포넌트값 전달받아 반영하기
-          <User
-            key={user.id}
-            user={user}
-            onRemove={onRemove}
-            onToggle={onToggle}
-          />
+          <User key={user.id} user={user} />
         ))}
       </ul>
     </div>
@@ -34,17 +30,19 @@ function UserList({ userList, onToggle, onRemove }) {
 }
 
 //({중괄호안에 비구조할당 만들어서 코드 줄이기})
-function User({ user, onRemove, onToggle }) {
+function User({ user }) {
+  const dispatch = useContext(UserDispatchContext);
+
   const { name, age, id, active } = user;
   return (
     <li>
       <span
         style={{ color: active && "blue", cursor: "pointer" }}
-        onClick={() => onToggle(id)}
+        onClick={() => dispatch({ type: "TOGGLE_USER", id })}
       >
         {name}({age}세)
       </span>
-      <button onClick={() => onRemove(id)} style={{ cursor: "pointer" }}>
+      <button onClick={() => dispatch({ type: "REMOVE_USER", id })}>
         삭제
       </button>
     </li>
