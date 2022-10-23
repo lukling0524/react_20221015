@@ -65,3 +65,12 @@ ctrl + shift + P -> 코드조각 열고 javascript react 들어가서
 
 
 파일 이름 자리에 ${TM_FILENAME_BASE} 넣으면 확장자 없이 파일명과 동일한 이름이 삽입됨
+
+
+
+provider 활용해서 상태 전역관리....
+useState => useReducer => Context API(다른 라이브러리로 많이 대체함..)
+
+useState - 관리할 상태값이 1개, 혹은 단순할 때
+useReducer - 관리할 상태값이 여러개 혹은 component에서 상태관리를 분리하고싶을때 사용
+

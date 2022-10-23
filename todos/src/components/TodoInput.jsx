@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { useRef, useState } from "react";
-import { darken, lighten } from "polished";
+import { darken } from "polished";
 
 function TodoInput({ dispatch }) {
   const [text, setText] = useState("");
@@ -14,14 +14,18 @@ function TodoInput({ dispatch }) {
       setActive(true);
       return;
     } else {
-      if (text === "") {
+      text === "" ? NoText() : WithText();
+
+      function NoText() {
         alert("텍스트를 입력 하세요!!");
         return;
       }
 
-      dispatch({ type: "CREATE_TODO", id: nextId.current, text });
-      nextId.current++;
-      setText("");
+      function WithText() {
+        dispatch({ type: "CREATE_TODO", id: nextId.current, text });
+        nextId.current++;
+        setText("");
+      }
 
       //   setActive(false);
     }
@@ -38,7 +42,7 @@ function TodoInput({ dispatch }) {
   );
 }
 
-// hoisting 되지 않으므로 사용하기 전에 선언
+// 자바스크립트가 아니라서 변수 hoisting 되지 않으므로 사용하기 전에 선언
 const slideUp = keyframes`
     from{
         transform: translateY(20px);

@@ -1,4 +1,4 @@
-import { darken, lighten } from "polished";
+import { lighten } from "polished";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import Todoheader from "./components/TodoHeader";
 import TodoInput from "./components/TodoInput";
