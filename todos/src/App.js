@@ -1,44 +1,50 @@
-import styled, { ThemeProvider } from "styled-components";
-import Button from "./components/Button";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import Todoheader from "./components/TodoHeader";
+import TodoInput from "./components/TodoInput";
+import TodoList from "./components/TodoList";
+
+import TodoTemplate from "./components/TodoTemplate";
+
+//글로벌 스타일 (reset) 적용
+const GlobalStyled = createGlobalStyle`
+*{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+}`;
 
 function App() {
   return (
-    <ThemeProvider
-      theme={{
-        colors: {
-          red: "#ff0000",
-          blue: "#133afe",
-          green: "#23fb13",
-        },
-      }}
-    >
-      <div>
-        <Title>hello</Title>
-        <Container>
-          <Button text="click" size="big" color="red" />
-          <Button text="클릭" color="blue" />
-        </Container>
-      </div>
-    </ThemeProvider>
+    <>
+      <GlobalStyled />
+      <ThemeProvider
+        theme={{
+          colors: {
+            main: "#3275c1",
+          },
+        }}
+      >
+        <AppBlock>
+          <TodoTemplate>
+            <Todoheader />
+            <TodoList />
+            <TodoInput />
+          </TodoTemplate>
+        </AppBlock>
+      </ThemeProvider>
+    </>
   );
 }
 
-//styled component 정의도 파스칼케이스로 작성.
-//컴포넌트 이름을 직관적으로 지을수있음
-const Title = styled.h1`
-  color: #ff0000;
-  background-color: #ddd;
-`;
-
-const Container = styled.div`
+const AppBlock = styled.div`
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  width: 300px;
-  height: 150px;
-  border: 1px solid #333;
-  margin: 0 auto;
+  background-color: #f4f4f4;
 `;
 
 export default App;
