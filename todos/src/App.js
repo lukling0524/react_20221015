@@ -1,9 +1,10 @@
+import { darken, lighten } from "polished";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import Todoheader from "./components/TodoHeader";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
-
 import TodoTemplate from "./components/TodoTemplate";
+import useTodoReducer from "./hooks/useTodoReducer";
 
 //글로벌 스타일 (reset) 적용
 const GlobalStyled = createGlobalStyle`
@@ -16,6 +17,8 @@ const GlobalStyled = createGlobalStyle`
 }`;
 
 function App() {
+  const [todos, dispatch] = useTodoReducer();
+
   return (
     <>
       <GlobalStyled />
@@ -23,14 +26,15 @@ function App() {
         theme={{
           colors: {
             main: "#3275c1",
+            active: lighten(0.1, "#3275c1"),
           },
         }}
       >
         <AppBlock>
           <TodoTemplate>
-            <Todoheader />
-            <TodoList />
-            <TodoInput />
+            <Todoheader todos={todos} />
+            <TodoList todos={todos} dispatch={dispatch} />
+            <TodoInput todos={todos} dispatch={dispatch} />
           </TodoTemplate>
         </AppBlock>
       </ThemeProvider>

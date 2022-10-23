@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import TodoItem from "./TodoItem";
 
-function TodoList() {
+function TodoList({ todos, dispatch }) {
   return (
     <ListBlock>
-      <TodoItem></TodoItem>
+      {todos.map((todo) => (
+        <TodoItem key={todo.id} todo={todo} dispatch={dispatch} />
+      ))}
     </ListBlock>
   );
 }
