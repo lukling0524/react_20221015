@@ -1,7 +1,14 @@
 import styled from "styled-components";
+import wave from "../../assets/images/img1.jpg";
 
-function CarouselItem() {
-  return <Block>아이템</Block>;
+function CarouselItem({ slide }) {
+  const { id, url } = slide;
+  return (
+    <Block>
+      <img src={wave} alt="qwe" />
+      {/* <img src={require(url)} alt="qwe" /> */}
+    </Block>
+  );
 }
 
 const Block = styled.li`
@@ -13,6 +20,10 @@ const Block = styled.li`
 
   &:nth-child(odd) {
     background-color: lightgrey;
+  }
+
+  img {
+    width: 100%;
   }
 `;
 

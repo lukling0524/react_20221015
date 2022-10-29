@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 // import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import Accordion from "./components/UI/Accordion";
+// import Accordion from "./components/UI/Accordion";
 import { createGlobalStyle } from "styled-components";
 import Carousel from "./components/UI/Carousel";
 
