@@ -5,9 +5,14 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 // import Accordion from "./components/UI/Accordion";
 import { createGlobalStyle } from "styled-components";
-import Carousel from "./components/UI/Carousel";
+// import Carousel from "./components/UI/Carousel";
+import Scroll from "./components/UI/Scroll";
 
 const GlobalStyle = createGlobalStyle`
+
+body{
+  height: 300vh;
+}
 *{
     margin: 0;
     padding: 0;
@@ -19,7 +24,8 @@ root.render(
   <>
     <GlobalStyle />
     {/* <Accordion /> */}
-    <Carousel />
+    {/* <Carousel /> */}
+    <Scroll />
   </>
 );
 
