@@ -5,6 +5,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Accordion from "./components/UI/Accordion";
 import { createGlobalStyle } from "styled-components";
+import Carousel from "./components/UI/Carousel";
 
 const GlobalStyle = createGlobalStyle`
 *{
@@ -17,7 +18,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <>
     <GlobalStyle />
-    <Accordion />
+    {/* <Accordion /> */}
+    <Carousel />
   </>
 );
 
