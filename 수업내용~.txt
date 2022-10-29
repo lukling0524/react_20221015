@@ -7,6 +7,8 @@ js-> 브라우저를 보조하기 위한 스크립트 언어
 
 node modul = 개발에 필요한 여러 모듈을 설치해서 개발 효율성 증가,.,...,.,..,,
 
+vs code - npm install
+
 cdm 열어서
 npm -g nodemon 설치 (nodemon : 브라우저를 통하지 않아도 js 파일이 출력되는것을 도와줌...)
 
