@@ -74,3 +74,7 @@ useState => useReducer => Context API(다른 라이브러리로 많이 대체함
 useState - 관리할 상태값이 1개, 혹은 단순할 때
 useReducer - 관리할 상태값이 여러개 혹은 component에서 상태관리를 분리하고싶을때 사용
 
+
+[221029]
+reset.css -> 직접 index.css에 삽입하는경우도 있고, react reset 설치해서 글로벌처럼 사용하는경우도 있음...
+

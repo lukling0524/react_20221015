@@ -118,7 +118,7 @@ function App() {
             onRemove={onRemove}
             onToggle={onToggle}
           />
-          <input type="text" oncChange={(e) => setText(e.target.value)} />
+          <input type="text" onChange={(e) => setText(e.target.value)} />
           {/* <ReducerCounter /> */}
         </UserStateContext.Provider>
       </UserDispatchContext.Provider>

@@ -1,15 +1,24 @@
 import styled, { css } from "styled-components";
 import { FaAngleDown } from "react-icons/fa";
+import { useState } from "react";
 
 function AccordionItem({ menu }) {
   const { name, content } = menu;
+  const [active, setActive] = useState(false);
+
+  const onToggle = (e) => {
+    setActive(!active);
+  };
+
   return (
     <Block>
       <MenuNameBox>
         <h3>{name}</h3>
-        <FaAngleDown></FaAngleDown>
+        <IconBox active={active}>
+          <FaAngleDown cursor="pointer" onClick={onToggle}></FaAngleDown>
+        </IconBox>
       </MenuNameBox>
-      <MenuContent active={true}>{content}</MenuContent>
+      <MenuContent active={active}>{content}</MenuContent>
     </Block>
   );
 }
@@ -30,17 +39,24 @@ const MenuNameBox = styled.div`
   align-items: center;
 `;
 
-const MenuContent = styled.p`
-  height: 100%;
-  max-height: 0;
-  overflow: hidden;
-  transition: height 0.25s;
+const IconBox = styled.div`
+  transform: rotate(${({ active }) => (active ? -180 : 0)}deg);
+  transition: transform 0.4s;
+`;
 
-  ${({ active }) =>
+const MenuContent = styled.p`
+  max-height: ${({ active }) => (active ? 200 : 0)}px;
+
+  /* padding: 5px 40px 5px 20px; */
+  overflow: hidden;
+  transition: max-height 0.8s;
+
+  /* ${({ active }) =>
     active &&
     css`
-      /* max-height: auto; */
-    `}
+      max-height: 200px;
+      max-height: auto;
+    `} */
 `;
 
 export default AccordionItem;
