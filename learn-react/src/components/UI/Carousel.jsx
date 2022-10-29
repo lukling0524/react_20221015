@@ -6,13 +6,15 @@ function Carousel() {
   return (
     <Block>
       <h1>Carousel</h1>
+
       <CarouselWrapper>
-        {/* {new Array(3).fill(1).map((_, idx) => {
-          return <CarouselItem key={idx} />;
-        })} */}
-        <CarouselItem></CarouselItem>
-        <CarouselItem></CarouselItem>
-        <CarouselItem></CarouselItem>
+        {/* {new Array(3).fill(1).map((_, idx) => (
+          <CarouselItem key={idx} id={idx + 1} />
+        ))} */}
+
+        <CarouselItem />
+        <CarouselItem />
+        <CarouselItem />
       </CarouselWrapper>
     </Block>
   );

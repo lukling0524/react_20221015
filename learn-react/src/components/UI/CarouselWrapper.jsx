@@ -1,50 +1,33 @@
 import styled from "styled-components";
-import {
-  BsFillArrowLeftCircleFill,
-  BsFillArrowRightCircleFill,
-} from "react-icons/bs";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { useCallback, useState } from "react";
 
 function CarouselWrapper({ children }) {
+  const [currIdx, setCurrIdx] = useState(0);
+
+  const changeIdx = useCallback(
+    (operator) => {
+      if (currIdx + operator === -1 || currIdx + operator === 3) return;
+      setCurrIdx(currIdx + operator);
+    },
+    [currIdx]
+  );
+
   return (
-    <Box>
-      <BsFillArrowLeftCircleFill className="arrow arrow__left" />
-      <Block>
-        <ul>{children}</ul>
-      </Block>
-      <BsFillArrowRightCircleFill className="arrow arrow__right" />
-    </Box>
+    <Block currIdx={currIdx}>
+      <Btn style={{ left: 20 }} onClick={() => changeIdx(-1)}>
+        <FaAngleLeft color="#fff" />
+      </Btn>
+      <ul>{children}</ul>
+      <Btn style={{ right: 20 }} onClick={() => changeIdx(+1)}>
+        <FaAngleRight color="#fff" />
+      </Btn>
+    </Block>
   );
 }
 
-const Box = styled.div`
-  display: flex;
-  align-items: center;
-
-  .arrow {
-    --size: 30px;
-    --distance: 20px;
-
-    position: absolute;
-    width: var(--size);
-    height: var(--size);
-    cursor: pointer;
-    transition: opacity 0.3s;
-
-    &:hover {
-      opacity: 0.7;
-    }
-
-    &__left {
-      left: var(--distance);
-    }
-
-    &__right {
-      right: var(--distance);
-    }
-  }
-`;
-
 const Block = styled.div`
+  position: relative;
   width: 100vw;
   height: 300px;
   border: 1px solid #999;
@@ -53,6 +36,31 @@ const Block = styled.div`
   ul {
     display: flex;
     height: 100%;
+    transform: translateX(${({ currIdx }) => currIdx * -100}vw);
+    transition: transform 0.5s;
+  }
+`;
+
+const Btn = styled.button`
+  --size: 40px;
+
+  width: var(--size);
+  height: var(--size);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 0;
+  border-radius: 100%;
+  z-index: 100;
+
+  &:hover {
+    opacity: 0.7;
   }
 `;
 
