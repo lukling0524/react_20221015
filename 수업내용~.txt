@@ -79,7 +79,23 @@ useReducer - 관리할 상태값이 여러개 혹은 component에서 상태관�
 
 [221029]
 reset.css -> 직접 index.css에 삽입하는경우도 있고, react reset 설치해서 글로벌처럼 사용하는경우도 있음...
-
+=> 터미널에 npms install styled-reset
 
 [221030]
 npm install react-router-dom   => SPA (Singla Page Application) 만드는 API
+
+
+curd = REST API
+메서드를 나눠서(5가지) 서버와 통신,,,
+
+post : 정보 만들기
+get : 정보를 가져오기
+put(전체 수정)/patch(부분수정) : 정보 수정
+delete : 정보 삭제
+
+JS에서는 fetch()메서드를 통해 서버통신 가능
+
+npm install -g json-server (DB 가상관리.?)
+json-server --watch db.json --8000(포트번호)
+
+base Url => ex> https://nepp.com/~~~이 부분에 들어가는 부분 (POSTS)

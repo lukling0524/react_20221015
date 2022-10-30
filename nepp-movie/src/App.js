@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import Movie from "./components/pages/Movie";
 import Tv from "./components/pages/Tv";
 import Home from "./components/pages/Home";
+import Post from "./components/practice/api/Post";
 
 const GlobalStyle = createGlobalStyle`
     :root{
@@ -34,6 +35,7 @@ function App() {
           <Route path="movie" element={<Movie />}></Route>
           <Route path="tv" element={<Tv />}></Route>
         </Routes>
+        <Post />
       </MainBlock>
     </>
   );
