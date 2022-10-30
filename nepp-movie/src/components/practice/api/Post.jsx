@@ -31,8 +31,18 @@ function Post() {
   //   const [posts, setPosts] = useState([]);
   const [title, setTitle] = useState("");
   const [state, fetchData] = useAsync(() => {
-    return axios.get("http://localhost:3000/posts");
+    return axios.get("v1/search/book.json", {
+      params: {
+        query: "javascript",
+      },
+      headers: {
+        "X-Naver-Client-Id": process.env.REACT_APP_ClientId,
+        "X-Naver-Client-Secret": process.env.REACT_APP_ClientSecret,
+      },
+    });
   });
+
+  console.log(process.env.REACT_APP_ClientId);
 
   //   const [state, dispatch] = useReducer(reducer, {
   //     loading: false,
@@ -85,10 +95,10 @@ function Post() {
       <input type="text" onChange={(e) => setTitle(e.target.value)} />
       <button onClick={onSubmit}>등록</button>
       {/* ?는 옵셔널체이닝 ↓ */}
-      {data?.map((post) => (
-        <li key={post.id}>
-          {post.title}
-          <button onClick={() => onDelete(post.id)}>삭제</button>
+      {data.items.map((item) => (
+        <li key={item.isbn}>
+          {item.title}({item.author})
+          <img src={item.image} />
         </li>
       ))}
     </div>

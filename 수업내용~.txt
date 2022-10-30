@@ -102,3 +102,6 @@ base Url => ex> https://nepp.com/~~~이 부분에 들어가는 부분 (POSTS)
 
 
 npm install axios -> fetch 편리하게 해주는 라이브러리
+
+url/{userId}
+쿼리스트링 : url?name=user1234&password=10099
