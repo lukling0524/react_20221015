@@ -40,6 +40,10 @@ const NavBlock = styled.nav`
   align-items: center;
   margin: 0 40px;
 
+  @media screen and (max-width: 600px) {
+    margin: 10px 20px;
+  }
+
   ul {
     display: table;
   }

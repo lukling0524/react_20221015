@@ -17,6 +17,10 @@ const HeaderBlock = styled.header`
   align-items: center;
   padding: var(--mainPadding);
   border: 1px solid #ddd;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 const Logo = styled.h1`

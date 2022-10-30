@@ -1,40 +1,44 @@
 import { useEffect, useReducer, useState } from "react";
 import axios from "axios";
+import useAsync from "./useAsync";
 
-function reducer(state, action) {
-  switch (action.type) {
-    case "LOADING":
-      return {
-        loading: true,
-        data: null,
-        error: null,
-      };
-    case "SUCCESS":
-      return {
-        loading: false,
-        data: action.data,
-        error: null,
-      };
-    case "ERROR":
-      return {
-        loading: false,
-        data: null,
-        error: action.error,
-      };
-    default:
-      throw new Error(`Fail action type :${action.type}`);
-  }
-}
+// function reducer(state, action) {
+//   switch (action.type) {
+//     case "LOADING":
+//       return {
+//         loading: true,
+//         data: null,
+//         error: null,
+//       };
+//     case "SUCCESS":
+//       return {
+//         loading: false,
+//         data: action.data,
+//         error: null,
+//       };
+//     case "ERROR":
+//       return {
+//         loading: false,
+//         data: null,
+//         error: action.error,
+//       };
+//     default:
+//       throw new Error(`Fail action type :${action.type}`);
+//   }
+// }
 
 function Post() {
-  const [posts, setPosts] = useState([]);
+  //   const [posts, setPosts] = useState([]);
   const [title, setTitle] = useState("");
-
-  const [state, dispatch] = useReducer(reducer, {
-    loading: false,
-    data: null,
-    error: null,
+  const [state, fetchData] = useAsync(() => {
+    return axios.get("http://localhost:3000/posts");
   });
+
+  //   const [state, dispatch] = useReducer(reducer, {
+  //     loading: false,
+  //     data: null,
+  //     error: null,
+  //   });
 
   const onSubmit = async () => {
     let result = await axios.post("http://localhost:3000/posts", {
@@ -51,22 +55,22 @@ function Post() {
     fetchData();
   };
 
-  async function fetchData() {
-    dispatch({ type: "LOADING" });
+  //   async function fetchData() {
+  //     dispatch({ type: "LOADING" });
 
-    try {
-      let { data } = await axios.get("http://localhost:3000/posts");
-      setPosts(data);
+  //     try {
+  //       let { data } = await axios.get("http://localhost:3000/posts");
+  //       setPosts(data);
 
-      dispatch({ type: "SUCCESS", data });
-    } catch (error) {
-      dispatch({ type: "ERROR", error });
-    }
-  }
+  //       dispatch({ type: "SUCCESS", data });
+  //     } catch (error) {
+  //       dispatch({ type: "ERROR", error });
+  //     }
+  //   }
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  //   useEffect(() => {
+  //     fetchData();
+  //   }, []);
 
   const { loading, data, error } = state;
 
