@@ -29,11 +29,14 @@ import useAsync from "./useAsync";
 
 function Post() {
   //   const [posts, setPosts] = useState([]);
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState("1");
   const [state, fetchData] = useAsync(() => {
     return axios.get("v1/search/book.json", {
       params: {
-        query: "javascript",
+        // query: "javascript",
+        query: title,
+        display: 5,
+        sort: "date",
       },
       headers: {
         "X-Naver-Client-Id": process.env.REACT_APP_ClientId,
@@ -51,12 +54,15 @@ function Post() {
   //   });
 
   const onSubmit = async () => {
-    let result = await axios.post("http://localhost:3000/posts", {
-      title,
-      author: "abc",
-    });
+    // let result = await axios.post("http://localhost:3000/posts", {
+    //   title,
+    //   author: "abc",
+    // });
+    // console.log(result);
+    // fetchData();
+
+    let result = fetchData();
     console.log(result);
-    fetchData();
   };
 
   const onDelete = async (id) => {
