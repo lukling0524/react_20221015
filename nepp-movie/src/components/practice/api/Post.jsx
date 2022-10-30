@@ -1,10 +1,40 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import axios from "axios";
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "LOADING":
+      return {
+        loading: true,
+        data: null,
+        error: null,
+      };
+    case "SUCCESS":
+      return {
+        loading: false,
+        data: action.data,
+        error: null,
+      };
+    case "ERROR":
+      return {
+        loading: false,
+        data: null,
+        error: action.error,
+      };
+    default:
+      throw new Error(`Fail action type :${action.type}`);
+  }
+}
 
 function Post() {
   const [posts, setPosts] = useState([]);
-  const [id, setId] = useState(0);
   const [title, setTitle] = useState("");
+
+  const [state, dispatch] = useReducer(reducer, {
+    loading: false,
+    data: null,
+    error: null,
+  });
 
   const onSubmit = async () => {
     let result = await axios.post("http://localhost:3000/posts", {
@@ -12,34 +42,37 @@ function Post() {
       author: "abc",
     });
     console.log(result);
-    // fetchData();
+    fetchData();
   };
 
   const onDelete = async (id) => {
     let result = await axios.delete("http://localhost:3000/posts/" + id);
     console.log(result);
-    // fetchData();
+    fetchData();
   };
 
-  useEffect(() => {
-    // fetch("http://localhost:3000/posts")
-    //   .then((res) => res.json())
-    //   .then((data) => console.log(data));
+  async function fetchData() {
+    dispatch({ type: "LOADING" });
 
-    // await 값이 없으면, 서버가 통신하는 그 찰나의 사이에 값이 없는 result가 출력되어 오류
-    // await을 사용하여 비동기처리해야함
-    async function fetchData() {
-      let result = await axios.get("http://localhost:3000/posts");
-      setPosts(result.data);
+    try {
+      let { data } = await axios.get("http://localhost:3000/posts");
+      setPosts(data);
 
-      //   let result = await fetch("http://localhost:3000/posts");
-      //   let data = await result.json();
-      //   setPosts(data);
-      //   console.log(result);
+      dispatch({ type: "SUCCESS", data });
+    } catch (error) {
+      dispatch({ type: "ERROR", error });
     }
+  }
 
+  useEffect(() => {
     fetchData();
   }, []);
+
+  const { loading, data, error } = state;
+
+  if (loading) return <div>로딩중....</div>;
+  if (error) return <div>에러발생!!!!</div>;
+  if (!data) return; // 데이터가 없으면 접근 x : 하단 옵셔널 체이닝과 똑같은 기능
 
   return (
     <div>
@@ -47,7 +80,8 @@ function Post() {
       {/* <input type="number" onChange={(e) => setId(e.target.value)} /> */}
       <input type="text" onChange={(e) => setTitle(e.target.value)} />
       <button onClick={onSubmit}>등록</button>
-      {posts.map((post) => (
+      {/* ?는 옵셔널체이닝 ↓ */}
+      {data?.map((post) => (
         <li key={post.id}>
           {post.title}
           <button onClick={() => onDelete(post.id)}>삭제</button>
