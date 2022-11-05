@@ -37,8 +37,10 @@ function SignUp() {
       }
     }
 
-    if (password !== confirmPassword) return;
-
+    if (password !== confirmPassword) {
+      alert("비밀번호를 확인해주세요");
+      return;
+    }
     try {
       let result = await axios.post("http://101.101.218.43/users", {
         name,
@@ -55,7 +57,7 @@ function SignUp() {
 
   return (
     <FormBox onSubmit={onSignUp}>
-      <h3>Sign In</h3>
+      <h3>Sign Up</h3>
       <InputWrapper>
         <InputBox
           type="text"

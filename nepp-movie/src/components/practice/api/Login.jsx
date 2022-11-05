@@ -2,10 +2,11 @@ import styled from "styled-components";
 import InputBox from "../../movie/InputBox";
 import { BiLogIn } from "react-icons/bi";
 import Button from "../../common/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormBox from "./FormBox";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 function Login() {
   const navigate = useNavigate();
@@ -15,6 +16,19 @@ function Login() {
     password: "",
     confirmPassword: "",
   });
+
+  const [cookies, setCookie, removeCookie] = useCookies(["access-token"]);
+
+  // 토큰을 가지고 있는지 확인
+  useEffect(() => {
+    // removeCookie(
+    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiI2MzY1ZDk0YzViYjU0NmFkOGZhYmIzNGYiLCJpYXQiOjE2Njc2MTk5OTYsImV4cCI6MTY5OTE3NzU5Nn0.Rzbxc0EPnMXl7FxP_xWRB1ijvbVL6Dq76zXXzcQ0NQo"
+    // );
+
+    if (cookies["access-token"]) {
+      navigate("/post");
+    }
+  }, [cookies, navigate]);
 
   const { email, password } = inputs;
 
@@ -34,8 +48,14 @@ function Login() {
         email,
         password,
       });
+      setCookie("access-token", result.data.data.token, {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 7,
+        // httpOnly: true,
+      });
+      navigate("/post");
 
-      console.log(result);
+      console.log(result.data.data.token);
     } catch (e) {
       console.log(e);
     }

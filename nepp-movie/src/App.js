@@ -9,6 +9,8 @@ import Home from "./components/pages/Home";
 import Post from "./components/practice/api/Post";
 import Login from "./components/practice/api/Login";
 import SignUp from "./components/practice/api/SignUp";
+import Button from "./components/common/Button";
+import { removeCookie } from "./utiles/cookie";
 
 const GlobalStyle = createGlobalStyle`
     :root{
@@ -34,7 +36,7 @@ function App() {
     <>
       <Reset />
       <GlobalStyle />
-      {/* <MovieHeader /> */}
+      <MovieHeader />
       <MainBlock>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -42,13 +44,24 @@ function App() {
           <Route path="tv" element={<Tv />}></Route>
           <Route path="login" element={<Login />}></Route>
           <Route path="signUp" element={<SignUp />}></Route>
+          <Route path="post" element={<Post />}></Route>
         </Routes>
       </MainBlock>
+      {/* <LogoutBtn>
+        <Button text="Logout" onClick={() => removeCookie("access-token")} />
+      </LogoutBtn> */}
     </>
   );
 }
 
 const MainBlock = styled.main`
-  /* padding: var(--mainPadding); */
+  padding: var(--mainPadding);
+`;
+
+const LogoutBtn = styled.div`
+  position: fixed;
+  width: 100px;
+  top: 10px;
+  right: 10px;
 `;
 export default App;

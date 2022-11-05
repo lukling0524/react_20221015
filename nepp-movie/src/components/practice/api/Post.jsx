@@ -1,114 +1,99 @@
+import styled from "styled-components";
 import { useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import useAsync from "./useAsync";
-
-// function reducer(state, action) {
-//   switch (action.type) {
-//     case "LOADING":
-//       return {
-//         loading: true,
-//         data: null,
-//         error: null,
-//       };
-//     case "SUCCESS":
-//       return {
-//         loading: false,
-//         data: action.data,
-//         error: null,
-//       };
-//     case "ERROR":
-//       return {
-//         loading: false,
-//         data: null,
-//         error: action.error,
-//       };
-//     default:
-//       throw new Error(`Fail action type :${action.type}`);
-//   }
-// }
+import { useCookies } from "react-cookie";
+import { getCookie } from "../../../utiles/cookie";
+import { BiHeart } from "react-icons/bi";
 
 function Post() {
-  //   const [posts, setPosts] = useState([]);
-  const [title, setTitle] = useState("1");
-  const [state, fetchData] = useAsync(() => {
-    return axios.get("v1/search/book.json", {
-      params: {
-        // query: "javascript",
-        query: title,
-        display: 5,
-        sort: "date",
-      },
-      headers: {
-        "X-Naver-Client-Id": process.env.REACT_APP_ClientId,
-        "X-Naver-Client-Secret": process.env.REACT_APP_ClientSecret,
-      },
-    });
-  });
+  const [postList, setPostList] = useState([]);
 
-  console.log(process.env.REACT_APP_ClientId);
+  const [cookies, removeCookie] = useCookies(["access-token"]);
 
-  //   const [state, dispatch] = useReducer(reducer, {
-  //     loading: false,
-  //     data: null,
-  //     error: null,
-  //   });
+  useEffect(() => {
+    removeCookie(
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiI2MzY1ZDk0YzViYjU0NmFkOGZhYmIzNGYiLCJpYXQiOjE2Njc2MTk5OTYsImV4cCI6MTY5OTE3NzU5Nn0.Rzbxc0EPnMXl7FxP_xWRB1ijvbVL6Dq76zXXzcQ0NQo"
+    );
+    axios
+      .get("http://101.101.218.43/posts/all/1", {
+        headers: {
+          Authorization: `bearer ${cookies["access-token"]}`,
+        },
+      })
+      .then((res) => {
+        setPostList(res.data.data);
 
-  const onSubmit = async () => {
-    // let result = await axios.post("http://localhost:3000/posts", {
-    //   title,
-    //   author: "abc",
-    // });
-    // console.log(result);
-    // fetchData();
-
-    let result = fetchData();
-    console.log(result);
-  };
-
-  const onDelete = async (id) => {
-    let result = await axios.delete("http://localhost:3000/posts/" + id);
-    console.log(result);
-    fetchData();
-  };
-
-  //   async function fetchData() {
-  //     dispatch({ type: "LOADING" });
-
-  //     try {
-  //       let { data } = await axios.get("http://localhost:3000/posts");
-  //       setPosts(data);
-
-  //       dispatch({ type: "SUCCESS", data });
-  //     } catch (error) {
-  //       dispatch({ type: "ERROR", error });
-  //     }
-  //   }
-
-  //   useEffect(() => {
-  //     fetchData();
-  //   }, []);
-
-  const { loading, data, error } = state;
-
-  if (loading) return <div>로딩중....</div>;
-  if (error) return <div>에러발생!!!!</div>;
-  if (!data) return; // 데이터가 없으면 접근 x : 하단 옵셔널 체이닝과 똑같은 기능
+        console.log(res.data.data);
+      });
+  }, []);
 
   return (
-    <div>
+    <PostListBlick>
       <h3>Practive API</h3>
-      {/* <input type="number" onChange={(e) => setId(e.target.value)} /> */}
-      <input type="text" onChange={(e) => setTitle(e.target.value)} />
-      <button onClick={onSubmit}>등록</button>
-      {/* ?는 옵셔널체이닝 ↓ */}
-      {data.items.map((item) => (
-        <li key={item.isbn}>
-          {item.title}({item.author})
-          <img src={item.image} />
-        </li>
-      ))}
-    </div>
+      <ul>
+        {postList.map((post) => (
+          <PostItem key={post.id} post={post} />
+        ))}
+      </ul>
+    </PostListBlick>
   );
 }
+
+const PostListBlick = styled.div`
+  display: flex;
+  justify-content: center;
+
+  ul {
+    border: 1px solid;
+  }
+`;
+
+function PostItem({ post }) {
+  const { body, img_urls, like_count } = post;
+
+  return (
+    <PostItemBlock>
+      <ImgBox>
+        {img_urls.map((url) => (
+          <img src={url} alt="" />
+        ))}
+      </ImgBox>
+      <BodyBlock> {body}</BodyBlock>
+      <div>
+        <BiHeart />
+        {like_count}
+      </div>
+    </PostItemBlock>
+  );
+}
+
+const PostItemBlock = styled.li`
+  padding: 10px 10px 5px;
+  border-bottom: 1px solid;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+`;
+
+const BodyBlock = styled.p`
+  margin-top: 10px;
+  font-size: 14px;
+`;
+
+const ImgBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 4px;
+
+  img {
+    width: 100%;
+  }
+`;
 
 export default Post;
