@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
-function Button({ text, bgColor }) {
-  return <DefaultButton bgColor={bgColor}>{text}</DefaultButton>;
+function Button({ text, bgColor, onClick }) {
+  return (
+    <DefaultButton bgColor={bgColor} onClick={onClick}>
+      {text}
+    </DefaultButton>
+  );
 }
 
 Button.defaultProps = {

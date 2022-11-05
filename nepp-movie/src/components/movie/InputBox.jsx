@@ -1,9 +1,14 @@
 import styled from "styled-components";
 
-function InputBox({ type, children, placeholder }) {
+function InputBox({ type, children, placeholder, name, onChange }) {
   return (
     <BarBlock>
-      <SearchInput type={type} placeholder={placeholder} />
+      <SearchInput
+        type={type}
+        placeholder={placeholder}
+        name={name}
+        onChange={onChange}
+      />
       {children}
     </BarBlock>
   );

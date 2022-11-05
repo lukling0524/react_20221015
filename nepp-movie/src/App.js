@@ -8,6 +8,7 @@ import Tv from "./components/pages/Tv";
 import Home from "./components/pages/Home";
 import Post from "./components/practice/api/Post";
 import Login from "./components/practice/api/Login";
+import SignUp from "./components/practice/api/SignUp";
 
 const GlobalStyle = createGlobalStyle`
     :root{
@@ -33,13 +34,14 @@ function App() {
     <>
       <Reset />
       <GlobalStyle />
-      <MovieHeader />
+      {/* <MovieHeader /> */}
       <MainBlock>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="movie" element={<Movie />}></Route>
           <Route path="tv" element={<Tv />}></Route>
-          <Route path="Login" element={<Login />}></Route>
+          <Route path="login" element={<Login />}></Route>
+          <Route path="signUp" element={<SignUp />}></Route>
         </Routes>
       </MainBlock>
     </>
