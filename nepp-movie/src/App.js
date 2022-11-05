@@ -7,6 +7,7 @@ import Movie from "./components/pages/Movie";
 import Tv from "./components/pages/Tv";
 import Home from "./components/pages/Home";
 import Post from "./components/practice/api/Post";
+import Login from "./components/practice/api/Login";
 
 const GlobalStyle = createGlobalStyle`
     :root{
@@ -21,6 +22,10 @@ const GlobalStyle = createGlobalStyle`
         color: inherit;
         text-decoration: none;
     }
+
+    button{
+      cursor: pointer;
+    }
 `;
 
 function App() {
@@ -34,14 +39,14 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="movie" element={<Movie />}></Route>
           <Route path="tv" element={<Tv />}></Route>
+          <Route path="Login" element={<Login />}></Route>
         </Routes>
-        <Post />
       </MainBlock>
     </>
   );
 }
 
 const MainBlock = styled.main`
-  padding: var(--mainPadding);
+  /* padding: var(--mainPadding); */
 `;
 export default App;

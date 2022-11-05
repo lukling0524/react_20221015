@@ -1,24 +1,31 @@
 import styled from "styled-components";
-import { AiOutlineSearch } from "react-icons/ai";
 
-function SearchBar() {
+function InputBox({ type, children, placeholder }) {
   return (
     <BarBlock>
-      <SearchInput type="text" />
-      <AiOutlineSearch />
+      <SearchInput type={type} placeholder={placeholder} />
+      {children}
     </BarBlock>
   );
 }
 
+InputBox.defaultProps = {
+  type: "text",
+};
+
 const BarBlock = styled.div`
-  max-width: 260px;
+  width: 100%;
+  max-width: 300px;
   min-width: 140px;
   display: flex;
-  flex: 1;
   align-items: center;
   padding: 5px;
   border: 1px solid #d1d1d1;
   border-radius: 4px;
+
+  & + & {
+    margin-top: 10px;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -31,4 +38,4 @@ const SearchInput = styled.input`
   border: 0;
   outline: 0;
 `;
-export default SearchBar;
+export default InputBox;

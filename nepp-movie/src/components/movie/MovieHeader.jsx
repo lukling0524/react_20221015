@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import MovieNav from "./MovieNav";
-import SearchBar from "./SearchBar";
-
+import InputBox from "./InputBox";
+import { AiOutlineSearch } from "react-icons/ai";
 function MovieHeader() {
   return (
     <HeaderBlock>
       <Logo>NEPP MOVIE</Logo>
       <MovieNav />
-      <SearchBar />
+      <InputBox>
+        <AiOutlineSearch />
+      </InputBox>
     </HeaderBlock>
   );
 }
