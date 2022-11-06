@@ -13,3 +13,15 @@ export async function getPopularMovieList() {
   let result = await movie_instance.get("movie/popular");
   return result;
 }
+
+export async function getMovieDetail(id) {
+  try {
+    return await movie_instance.get(`movie/${id}`, {
+      params: {
+        language: "ko-KR",
+      },
+    });
+  } catch (e) {
+    console.log(e);
+  }
+}

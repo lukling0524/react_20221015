@@ -1,17 +1,20 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 function MoviePopularItem({ movie }) {
-  const { title, poster_path, release_date } = movie;
+  const { id, title, poster_path, release_date } = movie;
   const url = "https://image.tmdb.org/t/p/original" + poster_path;
 
   return (
     <ItemBlock>
-      <Imgbox>
-        <img scr={url} alt={title} />
-      </Imgbox>
-      <TitleBox>
-        <strong>{release_date}</strong>
-        <h4>{title}</h4>
-      </TitleBox>
+      <Link to={id + ""}>
+        <Imgbox>
+          <img scr={url} alt={title} />
+        </Imgbox>
+        <TitleBox>
+          <strong>{release_date}</strong>
+          <h4>{title}</h4>
+        </TitleBox>
+      </Link>
     </ItemBlock>
   );
 }
@@ -38,7 +41,9 @@ const Imgbox = styled.div`
   overflow: hidden;
 
   img {
+    width: 100%;
     height: 100%;
+    background-color: #999;
   }
 `;
 export default MoviePopularItem;

@@ -12,6 +12,8 @@ function MoviePopularList() {
 
   useEffect(() => {
     getPopularMovieList().then((res) => setPopularList(res.data.results));
+
+    // console.log(popularList);
   }, []);
 
   // useEffect(() => {

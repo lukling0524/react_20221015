@@ -40,7 +40,7 @@ function App() {
       <MainBlock>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="movie" element={<Movie />}></Route>
+          <Route path="movie/*" element={<Movie />}></Route>
           <Route path="tv" element={<Tv />}></Route>
           <Route path="login" element={<Login />}></Route>
           <Route path="signUp" element={<SignUp />}></Route>
