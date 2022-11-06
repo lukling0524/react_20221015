@@ -21,6 +21,8 @@ nodemon watch [파일명 앞부분 적고 tab 하면 파일명 자동완성됨]
 cmd -> dir : 현재 디렉토리 파일 목록 조회
 cd 경로 : 해당 경로로 진입
 
+그냥 root 폴더의 주소창에 cmd 치면 바로 터미널로 연결됨!
+
 npx create-react-app [폴더명] : 프로젝트 폴더 생성
 
 터미널 열어서 npm start (서버띄우기)
