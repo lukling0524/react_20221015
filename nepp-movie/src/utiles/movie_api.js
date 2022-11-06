@@ -8,3 +8,8 @@ export const movie_instance = axios.create({
     Authorization: `bearer ${token}`,
   },
 });
+
+export async function getPopularMovieList() {
+  let result = await movie_instance.get("movie/popular");
+  return result;
+}

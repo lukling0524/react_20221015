@@ -1,21 +1,26 @@
 import styled from "styled-components";
 
-import axios from "axios";
+// import axios from "axios";
 import { useEffect, useState } from "react";
 import MoviePopularItem from "./MoviePopularItem";
 import Title from "./Title";
-import { movie_instance } from "../../utiles/movie_api";
+// import { movie_instance } from "../../utiles/movie_api";
+import { getPopularMovieList } from "../../utiles/movie_api";
 
 function MoviePopularList() {
-  const [popularList, setpopularList] = useState([]);
+  const [popularList, setPopularList] = useState([]);
 
   useEffect(() => {
-    movie_instance
-      .get("movie/popular")
-      .then((res) => setpopularList(res.data.results));
+    getPopularMovieList().then((res) => setPopularList(res.data.results));
+  }, []);
 
-    // console.log(popularList);
-  });
+  // useEffect(() => {
+  //   movie_instance
+  //     .get("movie/popular")
+  //     .then((res) => setpopularList(res.data.results));
+
+  //   // console.log(popularList);
+  // });
   return (
     <div>
       <Title title={"Movies"} />
