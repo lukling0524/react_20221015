@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
-function InputBox({ type, children, placeholder, name, onChange }) {
+function InputBox({
+  type,
+  children,
+  placeholder,
+  name,
+  onChange,
+  handleFocus,
+}) {
   return (
     <BarBlock>
       <SearchInput
@@ -8,6 +15,8 @@ function InputBox({ type, children, placeholder, name, onChange }) {
         placeholder={placeholder}
         name={name}
         onChange={onChange}
+        onBlur={() => handleFocus(false)}
+        onFocus={() => handleFocus(true)}
       />
       {children}
     </BarBlock>

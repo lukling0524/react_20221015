@@ -6,6 +6,11 @@ import { getMovieDetail } from "../../utiles/movie_api";
 function MovieDetail() {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
+
+  useEffect(() => {
+    getMovieDetail(id).then(({ data }) => setMovie(data));
+  });
+
   const {
     title,
     poster_path,
@@ -14,6 +19,7 @@ function MovieDetail() {
     release_date,
     homepage,
   } = movie;
+
   const url = "https://image.tmdb.org/t/p/original" + poster_path;
   const back_url = "https://image.tmdb.org/t/p/original" + backdrop_path;
 
@@ -25,8 +31,7 @@ function MovieDetail() {
     <DetailBox back_url={back_url}>
       <DetailInner>
         <ImgBox>
-          <Poster url={url} />
-          {/* <img scr={url} alt={title} /> */}
+          <img src={url} alt={title} />
         </ImgBox>
         <DetailContentBox>
           <TitleBox>
@@ -73,14 +78,6 @@ const ImgBox = styled.div`
     height: 100%;
     background-color: #999;
   }
-`;
-
-const Poster = styled.div`
-  width: 100%;
-  height: 100%;
-  background-image: url(${({ url }) => url});
-  background-size: contain;
-  background-position: center;
 `;
 
 const DetailContentBox = styled.div`

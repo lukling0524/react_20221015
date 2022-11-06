@@ -8,7 +8,7 @@ function MoviePopularItem({ movie }) {
     <ItemBlock>
       <Link to={id + ""}>
         <Imgbox>
-          <img scr={url} alt={title} />
+          <img src={url} alt={title} />
         </Imgbox>
         <TitleBox>
           <strong>{release_date}</strong>
@@ -22,6 +22,10 @@ function MoviePopularItem({ movie }) {
 const ItemBlock = styled.li`
   list-style: none;
   text-align: center;
+
+  & + & {
+    margin-left: 10px;
+  }
 `;
 
 const TitleBox = styled.div`
@@ -44,6 +48,8 @@ const Imgbox = styled.div`
     width: 100%;
     height: 100%;
     background-color: #999;
+    border-radius: 6px;
   }
 `;
+
 export default MoviePopularItem;
