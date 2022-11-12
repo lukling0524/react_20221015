@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const Button = styled.button`
     width: 100%;
@@ -32,7 +32,7 @@ export const Button = styled.button`
 `;
 
 export const RedButton = styled(Button)`
-    background-color: #d93838;
+    background-color: #bf1a1a;
 `;
 
 export const Blue = styled(Button)`

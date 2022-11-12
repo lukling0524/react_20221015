@@ -4,7 +4,7 @@ import Todos from "./compontnes/Todos";
 function App() {
   return (
     <>
-      <Counter />
+      {/* <Counter /> */}
       <Todos />
     </>
   );
