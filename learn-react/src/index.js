@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import { createGlobalStyle } from "styled-components";
 // import Carousel from "./components/UI/Carousel";
 import Scroll from "./components/UI/Scroll";
+import { RecoilRoot } from "recoil";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -21,12 +22,12 @@ body{
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <>
-    <GlobalStyle />
-    {/* <Accordion /> */}
-    {/* <Carousel /> */}
-    <Scroll />
-  </>
+    <RecoilRoot>
+        <GlobalStyle />
+        {/* <Accordion /> */}
+        {/* <Carousel /> */}
+        <Scroll />
+    </RecoilRoot>
 );
 
 reportWebVitals();
