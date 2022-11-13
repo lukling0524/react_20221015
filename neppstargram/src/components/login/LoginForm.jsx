@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { useState } from "react";
 import { postlogin } from "../../api";
+import { motion } from "framer-motion";
 
 function LoginForm() {
     const [inputs, setInputs] = useState({
@@ -32,7 +33,11 @@ function LoginForm() {
     };
 
     return (
-        <>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
             <Title title="login" />
             <Form margin="20px 0" onSubmit={handleSubmit}>
                 <Input
@@ -57,7 +62,7 @@ function LoginForm() {
                     </Link>
                 </div>
             </Form>
-        </>
+        </motion.div>
     );
 }
 

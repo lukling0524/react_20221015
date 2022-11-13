@@ -8,6 +8,8 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import styled from "styled-components";
 import axios from "axios";
 import { postSignIn } from "../../api";
+import { motion } from "framer-motion";
+
 function SigninForm() {
     const [inputs, setInputs] = useState({
         username: "",
@@ -49,7 +51,11 @@ function SigninForm() {
     };
 
     return (
-        <>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
             <BackIcon>
                 <Link to="/accounts/login">
                     <IoMdArrowRoundBack size="24" />
@@ -81,7 +87,7 @@ function SigninForm() {
                     Sign in {!disabled ? <Emoji>🙌</Emoji> : <span>👀</span>}
                 </RedButton>
             </Form>
-        </>
+        </motion.div>
     );
 }
 
