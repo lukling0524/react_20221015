@@ -4,10 +4,7 @@ function PostUser() {
     return (
         <Block>
             <ImgCircle>
-                <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPzwL4N_siRRO59z1YZxfLBdMdm73-FRfjEckG4qIbeBXNk3xNmLHRPTbB1-aBayTjeoQ&usqp=CAU"
-                    alt="image"
-                />
+                <img src="https://url.kr/dp7vuj" alt="profile" />
             </ImgCircle>
             이름
         </Block>
@@ -17,7 +14,7 @@ function PostUser() {
 const Block = styled.div`
     display: flex;
     align-items: center;
-    padding: 4px 10px;
+    padding: 10px;
 `;
 
 const ImgCircle = styled.div`

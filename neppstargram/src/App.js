@@ -1,6 +1,8 @@
+import { AnimatePresence } from "framer-motion";
 import { Route, Routes } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import Login from "../src/components/pages/Login";
+import AppBlock from "./components/common/AppBlock";
 import LoginForm from "./components/login/LoginForm";
 import SigninForm from "./components/login/SigninForm";
 import Post from "./components/pages/Post";
@@ -12,13 +14,14 @@ function App() {
     :root{
         --borderRadius: 4px;
         --space : 10px;
+        --postWidth: 300px;
     }
 
     *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      list-style: none;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        list-style: none;
     }
 
     a{
@@ -27,7 +30,7 @@ function App() {
     }
     
     body{
-      background-color: #dfebf1;
+        background-color: #dfebf1;
     }
   `;
 
@@ -35,16 +38,20 @@ function App() {
         <Block>
             <InnerBlock>
                 <GlobalStyle />
-                <Routes>
-                    <Route path="/" element={<Login />}>
-                        <Route path="login" element={<LoginForm />} />
-                        <Route path="signin" element={<SigninForm />} />
-                    </Route>
-                    <Route path="post" element={<Post />}>
-                        <Route path="" element={<PostList />} />
-                        <Route path=":id" element={<PostDetail />} />
-                    </Route>
-                </Routes>
+                <AnimatePresence>
+                    <Routes>
+                        <Route path="/accounts" element={<Login />}>
+                            <Route path="login" element={<LoginForm />} />
+                            <Route path="signin" element={<SigninForm />} />
+                        </Route>
+                        <Route path="/" element={<AppBlock />}>
+                            <Route path="post" element={<Post />}>
+                                <Route path="" element={<PostList />} />
+                                <Route path=":id" element={<PostDetail />} />
+                            </Route>
+                        </Route>
+                    </Routes>
+                </AnimatePresence>
             </InnerBlock>
         </Block>
     );
@@ -59,11 +66,18 @@ const Block = styled.div`
 `;
 
 const InnerBlock = styled.div`
-    width: 300px;
+    position: relative;
+    width: var(--postWidth);
     height: 500px;
-    /* padding: 10px 20px; */
-    text-align: center;
+    /* display: flex;
+    align-items: center;
+    text-align: center; */
     border: 1px solid;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `;
 
 export default App;

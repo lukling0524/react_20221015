@@ -4,6 +4,7 @@ function PostList() {
     return (
         <div>
             <PostItem />
+            <PostItem />
         </div>
     );
 }
