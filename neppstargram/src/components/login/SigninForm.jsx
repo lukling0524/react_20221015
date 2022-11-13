@@ -1,14 +1,14 @@
 import { Form } from "../common/form";
 import { Input } from "../common/input";
 import Title from "../common/title";
-import { Emoji, Motion, RedButton } from "../common/buttons";
+import { Button, Emoji, Motion, RedButton } from "../common/buttons";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import styled from "styled-components";
 import axios from "axios";
 import { postSignIn } from "../../api";
-import { motion } from "framer-motion";
+import SmoothMotion from "../common/SmoothMotion";
 
 function SigninForm() {
     const [inputs, setInputs] = useState({
@@ -51,11 +51,7 @@ function SigninForm() {
     };
 
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-        >
+        <SmoothMotion>
             <BackIcon>
                 <Link to="/accounts/login">
                     <IoMdArrowRoundBack size="24" />
@@ -83,11 +79,19 @@ function SigninForm() {
                     name={"confirm"}
                     onChange={handleInput}
                 />
-                <RedButton disabled={disabled} style={{ marginTop: "30px" }}>
+                <RedButton
+                    disabled={disabled}
+                    style={{ margin: "30px 0 10px" }}
+                >
                     Sign in {!disabled ? <Emoji>🙌</Emoji> : <span>👀</span>}
                 </RedButton>
+                <Link to="/accounts/login">
+                    <Button>
+                        Back <Emoji>🧐</Emoji>
+                    </Button>
+                </Link>
             </Form>
-        </motion.div>
+        </SmoothMotion>
     );
 }
 

@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import Login from "../src/components/pages/Login";
 import AppBlock from "./components/common/AppBlock";
+import Edit from "./components/common/edit/Edit";
 import LoginForm from "./components/login/LoginForm";
 import SigninForm from "./components/login/SigninForm";
 import Post from "./components/pages/Post";
@@ -49,6 +50,7 @@ function App() {
                                 <Route path="" element={<PostList />} />
                                 <Route path=":id" element={<PostDetail />} />
                             </Route>
+                            <Route path="edit" element={<Edit />} />
                         </Route>
                     </Routes>
                 </AnimatePresence>

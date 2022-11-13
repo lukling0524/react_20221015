@@ -50,6 +50,7 @@ const ImgList = styled.ul`
 
     li {
         width: var(--postWidth);
+        flex-shrink: 0;
     }
 
     img {

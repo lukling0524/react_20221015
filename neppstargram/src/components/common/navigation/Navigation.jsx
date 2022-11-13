@@ -11,17 +11,17 @@ const navigation = [
     },
     {
         id: 2,
-        path: "/search",
+        path: "/edit",
         icon: <BsSearch />,
     },
     {
         id: 3,
-        path: "/like",
+        path: "/#",
         icon: <BsFillHeartFill />,
     },
     {
         id: 4,
-        path: "/profile",
+        path: "/accounts/login",
         icon: <BsPersonFill />,
     },
 ];

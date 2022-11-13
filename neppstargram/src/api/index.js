@@ -38,3 +38,16 @@ export const getPost = async (page) => {
         throw new Error(alert("❌ POST ERROR ❌"));
     }
 };
+
+export const PostEdit = async (form) => {
+    try {
+        return await axios.post("http://101.101.218.43/posts/", form, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+    } catch (e) {
+        console.log(e);
+        throw new Error(alert("🙅‍♀️ EDIT ERROR 🙅‍♀️"));
+    }
+};

@@ -2,15 +2,13 @@ import styled from "styled-components";
 import PostImgbox from "./PostImgbox";
 import PostUser from "./PostUser";
 
-function PostItem() {
+function PostItem({ post }) {
+    console.log(post);
     return (
         <Block>
             <PostUser />
-            <PostImgbox />
-            <ContentBox>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Distinctio, fuga.
-            </ContentBox>
+            <PostImgbox imgUrls={post.img_urls} />
+            <ContentBox>{post.body}</ContentBox>
         </Block>
     );
 }
